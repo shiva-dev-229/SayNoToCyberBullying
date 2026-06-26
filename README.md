@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Say No 2 Cyber Bullying
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> An educational React web app that raises awareness about cyberbullying — what it is, why it happens, who it affects, and how to respond — paired with interactive review games. Built to inform and equip teens with practical steps for staying safe online.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## About
 
-### `npm start`
+**Say No 2 Cyber Bullying** is a single-page React application designed as an awareness resource. It walks a visitor through the topic in plain language and then reinforces it with an interactive quiz, so the experience is part lesson, part activity.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The app is organized around two views, toggled from the header:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Home** — the educational content.
+- **Games** — a link out to a Blooket review set so visitors can test what they learned.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+- **Topic walkthrough** — a series of illustrated cards, each answering one question:
+  - What is cyberbullying?
+  - Why do people cyberbully?
+  - Who is affected?
+  - What are the mental, physical, and social effects?
+  - How can you protect yourself? (the **SMART** framework)
+  - What should you do if you're being bullied?
+- **Statistics section** — key figures conveying the scale and impact of cyberbullying.
+- **Interactive games** — a linked Blooket quiz set for reviewing the material.
+- **Two-view navigation** — a header toggle switches between the Home content and the Games view, handled with React state.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How it's built
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The app keeps content and presentation separate, which makes it easy to update:
 
-### `npm run eject`
+- **`src/Public/Answers.jsx`** holds the educational copy as exported strings — the "content layer."
+- **`src/Components/Home/TextBox.jsx`** is a single reusable card component (title + image + description). The `Info` component feeds each piece of content into a `TextBox`, so every section shares one consistent layout.
+- **`src/App.jsx`** holds the top-level state that switches between the Home and Games views.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+src/
+├── App.jsx                     # Top-level view switching
+├── Components/
+│   ├── Header/                 # Logo, title, Home/Games toggle
+│   ├── Home/                   # Image, Info, TextBox, Statistics, ProgressBar
+│   └── Games/                  # Blooket quiz links
+├── Public/
+│   └── Answers.jsx             # Educational content (text)
+└── Assests/                    # Images and logo
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Getting started
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This is a [Create React App](https://create-react-app.dev/) project.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm install      # install dependencies
+npm start        # run locally at http://localhost:3000
+npm run build    # produce an optimized production build
+```
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The repo includes an `amplify.yml`, so it's configured to deploy on **AWS Amplify** (it installs, builds, and serves the `build/` folder). It can also be deployed to any static host (Netlify, Vercel, GitHub Pages) using the output of `npm run build`.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Tech stack
+
+- **React 18**
+- **Create React App** (react-scripts)
+- **AWS Amplify** (deployment configuration)
+
+---
+
+## A note on the topic
+
+This project deals with cyberbullying and its effects, including impacts on mental health. If you or someone you know is struggling, reach out for support — in the US, you can call or text **988** to reach the Suicide & Crisis Lifeline. Adding an in-app "Get Help" section with resources like this is a recommended next step for the project.
